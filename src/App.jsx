@@ -9,6 +9,7 @@ import axios from 'axios'
 
 function App() {
   const [movies, setMovies] = useState([])
+  const [movieId, setMovieId] = useState(null)
 
   const handleMovieSearch = async (movieName) => {
     console.log(movieName)
@@ -18,13 +19,18 @@ function App() {
     console.log(response.data)
     setMovies(response.data.Search)
   }
+
+  const handlePassMovie = (imbdId) => {
+    alert(`Movie ID passed ${imbdId}`)
+    setMovieId(imbdId)
+  }
  
   return (
     <>
       <Header/>
       <div className='container'>
       <Search retrieveMovieSearch={handleMovieSearch}/>
-      <MovieList movieList={movies}/>
+      <MovieList movieList={movies} passMovieId={handlePassMovie}/>
       </div>
       <Footer/>
     </>
