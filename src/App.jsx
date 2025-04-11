@@ -6,12 +6,15 @@ import MovieList from './components/MovieList'
 import Search from './components/Search'
 
 function App() {
+  const handleMovieSearch = (movieName) => {
+    console.log(movieName)
+  }
  
   return (
     <>
       <Header/>
       <div className='container'>
-      <Search/>
+      <Search retrieveMovieSearch={handleMovieSearch}/>
       <MovieList/>
       </div>
       <Footer/>

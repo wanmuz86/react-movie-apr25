@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Search = () => {
+const Search = ({retrieveMovieSearch}) => {
     const [movieName,setMovieName] = useState('')
   
     return (
@@ -21,7 +21,8 @@ const Search = () => {
             className='btn btn-primary' 
             style={{width:'100%'}}
             onClick={() => {
-                console.log(movieName)
+                
+                retrieveMovieSearch(movieName)
             }}
             >Search</button>
         </div>
