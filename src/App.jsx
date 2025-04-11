@@ -4,6 +4,8 @@ import './App.css'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import MovieList from './components/MovieList'
+import MovieDetail from './components/MovieDetail'
+
 import Search from './components/Search'
 import axios from 'axios'
 
@@ -21,7 +23,7 @@ function App() {
   }
 
   const handlePassMovie = (imbdId) => {
-    alert(`Movie ID passed ${imbdId}`)
+   
     setMovieId(imbdId)
   }
  
@@ -31,6 +33,7 @@ function App() {
       <div className='container'>
       <Search retrieveMovieSearch={handleMovieSearch}/>
       <MovieList movieList={movies} passMovieId={handlePassMovie}/>
+      <MovieDetail movieId={movieId}/>
       </div>
       <Footer/>
     </>
