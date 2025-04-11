@@ -11,8 +11,10 @@ function App() {
   return (
     <>
       <Header/>
+      <div className='container'>
       <Search/>
       <MovieList/>
+      </div>
       <Footer/>
     </>
   )
