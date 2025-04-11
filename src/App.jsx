@@ -24,7 +24,7 @@ function App() {
       <Header/>
       <div className='container'>
       <Search retrieveMovieSearch={handleMovieSearch}/>
-      <MovieList/>
+      <MovieList movieList={movies}/>
       </div>
       <Footer/>
     </>
