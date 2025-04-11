@@ -26,8 +26,11 @@ function App() {
         console.log("Reached the bottom of the page!");
         // Do something, like loading more content
      // Check I am on the 92th page
-        fetchApi(movieNameRef.current,page)
-        setPage(page+1) // increment page
+     setPage(prevPage => {
+      const nextPage = prevPage + 1;
+      fetchApi(movieNameRef.current, nextPage); // use incremented value here
+      return nextPage;
+    });
       }
     };
 
