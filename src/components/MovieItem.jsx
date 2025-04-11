@@ -4,6 +4,7 @@ const MovieItem = ({movie,selectMovie}) => {
     const handleMovieClicked = () => {
         selectMovie(movie.imdbID)
     }
+    
   return (
     // Card with 2 columns, with margin top bottom 3 , padding 3
     <div className='card p-3 my-3 bg-light' onClick={handleMovieClicked}>

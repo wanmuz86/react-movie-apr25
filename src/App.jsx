@@ -23,19 +23,27 @@ function App() {
   }
 
   const handlePassMovie = (imbdId) => {
-   
+
     setMovieId(imbdId)
   }
- 
+
   return (
     <>
-      <Header/>
+      <Header />
       <div className='container'>
-      <Search retrieveMovieSearch={handleMovieSearch}/>
-      <MovieList movieList={movies} passMovieId={handlePassMovie}/>
-      <MovieDetail movieId={movieId}/>
+        <Search retrieveMovieSearch={handleMovieSearch} />
+        <div className='row'>
+          <div className='col-6'>
+            <MovieList movieList={movies} passMovieId={handlePassMovie} />
+
+          </div>
+          <div className='col-6'>
+            <MovieDetail movieId={movieId} />
+          </div>
+        </div>
+
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }

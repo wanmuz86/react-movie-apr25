@@ -17,11 +17,19 @@ const MovieDetail = ({movieId}) => {
   }
 
   return (
-    <div>
+    <div className='card p-5 text-center mt-3'>
       {
         movieDetail && (
           <div>
-          <h6>{movieDetail.Title}</h6>
+          <h4>{movieDetail.Title}</h4>
+          <p>{movieDetail.Year} - {movieDetail.Type}</p>
+          <img src={movieDetail.Poster} alt={movieDetail.Title} />
+          <p className='mt-3'>{movieDetail.Plot}</p>
+          <p>{movieDetail.Director}</p>
+          <p>{movieDetail.Actors}</p>
+          <p>{movieDetail.Genre }</p>
+          <p>{movieDetail.Runtime }</p>
+          <p>{movieDetail.Released }</p>
           </div>
         )
       }
