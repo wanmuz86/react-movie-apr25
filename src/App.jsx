@@ -13,6 +13,7 @@ function App() {
   const [movies, setMovies] = useState([])
   const [movieId, setMovieId] = useState(null)
   const [movieName, setMovieName] = useState('')  
+  const [page,setPage] = useState(1)
   const movieNameRef = useRef('');
 
   useEffect(() => {
@@ -24,8 +25,9 @@ function App() {
       if (isBottom) {
         console.log("Reached the bottom of the page!");
         // Do something, like loading more content
-        console.log(movieName)
-        fetchApi(movieNameRef.current,2)
+     // Check I am on the 92th page
+        fetchApi(movieNameRef.current,page)
+        setPage(page+1) // increment page
       }
     };
 
@@ -36,9 +38,11 @@ function App() {
 
   const handleMovieSearch = async (title) => {
     
+    // setState is asynchronous, so we need to use useRef to get the latest value
     setMovieName(title)
     movieNameRef.current = title; 
-    fetchApi(title,1)
+    fetchApi(title,page)
+    setPage(page+1)
 
     // Fetch movie data from API
   
@@ -47,6 +51,7 @@ function App() {
   const fetchApi = async (movieName,page) => {
     console.log(movieName)
     const response = await axios.get(`https://www.omdbapi.com/?s=${movieName}&page=${page}&apikey=87d10179`)
+    // Add the data to the exting []
     setMovies(prev => [...prev, ...response.data.Search]);
   }
 
