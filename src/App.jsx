@@ -14,10 +14,15 @@ function App() {
   const [movieId, setMovieId] = useState(null)
   const [movieName, setMovieName] = useState('')  
   const [page,setPage] = useState(1)
+  const [loading,setLoading] = useState(false);
   const movieNameRef = useRef('');
+  
 
   useEffect(() => {
     const handleScroll = () => {
+      
+
+      // To detect by the end of the page
       const isBottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight;
        
@@ -26,16 +31,29 @@ function App() {
         console.log("Reached the bottom of the page!");
         // Do something, like loading more content
      // Check I am on the 92th page
+
+// The setter in useState is asynchronous
+  // Calling setState using previous value -> To override the basic setstate, so API call can be called before 
+  // setting the value of the state
+  // setPage(prevPage => prevPage + 1)
+
      setPage(prevPage => {
-      const nextPage = prevPage + 1;
-      fetchApi(movieNameRef.current, nextPage); // use incremented value here
-      return nextPage;
+    
+      const nextPage = prevPage + 1; // constant variable
+      fetchApi(movieNameRef.current, nextPage); // call the api
+      return nextPage; // updating the state
+
     });
+    
       }
     };
 
     // When the window arrive at the end of the page, call the handleScroll function
+
+    // Wait for the scrolling event to happen
     window.addEventListener("scroll", handleScroll);
+
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -52,9 +70,10 @@ function App() {
   }
 
   const fetchApi = async (movieName,page) => {
-    console.log(movieName)
+   setLoading(true)
     const response = await axios.get(`https://www.omdbapi.com/?s=${movieName}&page=${page}&apikey=87d10179`)
     // Add the data to the exting []
+    setLoading(false)
     setMovies(prev => [...prev, ...response.data.Search]);
   }
 
@@ -71,7 +90,7 @@ function App() {
         <div className='row'>
           <div className='col-6'>
             <MovieList movieList={movies} passMovieId={handlePassMovie} />
-
+            {loading && <div className='text-center'>Loading...</div> }
           </div>
           <div className='col-6'>
             <MovieDetail movieId={movieId} />
